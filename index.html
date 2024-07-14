@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conciencia sobre la Contaminación en Puno, Perú</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="#impacto">Impacto</a></li>
+            <li><a href="#causas">Causas</a></li>
+            <li><a href="#soluciones">Soluciones</a></li>
+            <li><a href="#autores">Autores</a></li>
+        </ul>
+    </div>
+
+    <div class="container" style="margin-top: 70px;">
+        <h1><i class="fas fa-leaf icon"></i>Conciencia sobre la Contaminación en Puno, Perú</h1>
+        <p>La contaminación es un problema global que afecta a todos los seres vivos en la Tierra, y Puno, Perú, no es una excepción. Debemos tomar medidas para reducir nuestra huella ambiental y proteger nuestro planeta.</p>
+
+        <div class="video-section">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/B3EFXoDCQ9U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <h2 id="impacto" class="section-title"><i class="fas fa-exclamation-triangle icon"></i>Impacto de la Contaminación en Puno</h2>
+        <p>La contaminación en nuestra región es un problema muy grave que afecta el medio ambiente como en los lagos, ríos, carreteras y ciudades. En esta ocasión especialmente nos concentraremos en el problema de la contaminación en las carreteras debido a que por culpa de los pasajeros están cada vez con más basura, ya que los arrojan por las ventanas, en su mayoría son plásticos, botellas, vidrios hasta pañales, etc.</p>
+
+        <h2 id="causas" class="section-title"><i class="fas fa-water icon"></i>Causas Principales</h2>
+        <p>Las causas principales de la contaminación en las carreteras de Puno incluyen:</p>
+        <ul>
+            <li><i class="fas fa-tint icon"></i>Quema de basura.</li>
+            <li><i class="fas fa-trash-alt icon"></i>Desechos de construcción.</li>
+            <li><i class="fas fa-industry icon"></i>Abandono de basura por parte de conductores.</li>
+        </ul>
+
+        <h2 id="soluciones" class="section-title"><i class="fas fa-hands-helping icon"></i>Soluciones y Acciones</h2>
+        <p>Para resolver el problema de la basura en las carreteras de Puno, es crucial implementar campañas educativas, programas de reciclaje, instalación de contenedores, vigilancia y sanciones, limpiezas periódicas y promoción de la responsabilidad ciudadana en la gestión adecuada de residuos. Estas acciones combinadas pueden mejorar la situación y promover un entorno más limpio y sostenible en la ciudad.</p>
+
+        <div id="autores" class="authors">
+            <p><i class="fas fa-user-friends icon"></i>Autores: Samir Ticona Huaracca y Ostyn Cruz Jahuira</p>
+        </div>
+    </div>
+
+    <div class="floating-weather-widget">
+        <div class="weather-info">
+            <h2>Clima en Puno -hoy-</h2>
+            <p id="weather-description">Cargando...</p>
+            <p id="temperature"></p>
+            <p id="wind"></p>
+            <p id="humidity"></p>
+            <p id="feels-like"></p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            const appId = '7bf8e866';
+            const appKey = '7b93a5a7abb5ab5d6b89bcc7969fb52d';
+            const lat = -15.8422;
+            const lon = -70.0199;
+            const apiUrl = `http://api.weatherunlocked.com/api/current/${lat},${lon}?app_id=${appId}&app_key=${appKey}`;
+
+            $.getJSON(apiUrl, function(data) {
+                if (data) {
+                    const description = data.wx_desc;
+                    const temp = data.temp_c;
+                    const feelsLike = data.feelslike_c;
+                    const windSpeed = data.windspd_kmh;
+                    const humidity = data.humid_pct;
+
+                    $('#weather-description').text(description.charAt(0).toUpperCase() + description.slice(1));
+                    $('#temperature').html(`Temperatura: ${temp.toFixed(1)}°C`);
+                    $('#wind').text(`Viento: ${windSpeed} km/h`);
+                    $('#humidity').text(`Humedad: ${humidity}%`);
+                    $('#feels-like').text(`Sensación térmica: ${feelsLike.toFixed(1)}°C`);
+                } else {
+                    $('#weather-description').text('No se pudo obtener el clima.');
+                }
+            }).fail(function() {
+                $('#weather-description').text('No se pudo obtener el clima.');
+                $('#temperature').text('');
+                $('#wind').text('');
+                $('#humidity').text('');
+                $('#feels-like').text('');
+            });
+        });
+    </script>
+</body>
+</html>
