@@ -55,39 +55,5 @@
             <p id="feels-like"></p>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function() {
-            const appId = '7bf8e866';
-            const appKey = '7b93a5a7abb5ab5d6b89bcc7969fb52d';
-            const lat = -15.8422;
-            const lon = -70.0199;
-            const apiUrl = `http://api.weatherunlocked.com/api/current/${lat},${lon}?app_id=${appId}&app_key=${appKey}`;
-
-            $.getJSON(apiUrl, function(data) {
-                if (data) {
-                    const description = data.wx_desc;
-                    const temp = data.temp_c;
-                    const feelsLike = data.feelslike_c;
-                    const windSpeed = data.windspd_kmh;
-                    const humidity = data.humid_pct;
-
-                    $('#weather-description').text(description.charAt(0).toUpperCase() + description.slice(1));
-                    $('#temperature').html(`Temperatura: ${temp.toFixed(1)}°C`);
-                    $('#wind').text(`Viento: ${windSpeed} km/h`);
-                    $('#humidity').text(`Humedad: ${humidity}%`);
-                    $('#feels-like').text(`Sensación térmica: ${feelsLike.toFixed(1)}°C`);
-                } else {
-                    $('#weather-description').text('La Tierra es nuestro hogar. Cuidémosla hoy para un mañana más limpio y brillante.');
-                }
-            }).fail(function() {
-                $('#weather-description').text('No se pudo obtener el clima.');
-                $('#temperature').text('');
-                $('#wind').text('');
-                $('#humidity').text('');
-                $('#feels-like').text('');
-            });
-        });
-    </script>
-</body>
+ </body>
 </html>
